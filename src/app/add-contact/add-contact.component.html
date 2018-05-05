@@ -1,0 +1,64 @@
+<h5>Add your Friend</h5>
+<form [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
+    <!--
+    <div class="form-group" *ngFor="let input of inputs; let i = index">
+        <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
+        <input *ngIf="input == 'Phone Number'; else texted" type="number"
+            [id]="input.toLowerCase().split(' ').join('')"
+            [formControlName]="input.toLowerCase().split(' ').join('')"
+            class="form-control">
+        <ng-template #texted>
+            <input type="text"
+            [id]="input.toLowerCase().split(' ').join('')"
+            [formControlName]="input.toLowerCase().split(' ').join('')"
+            class="form-control">
+        </ng-template>   
+    </div>
+    -->
+    <div class="form-group" *ngFor="let input of inputs; let i = index">
+        <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
+        <div [ngSwitch]="input">
+            <div *ngSwitchCase="'Phone Number'">
+                    <input type="number"
+                    [id]="input.toLowerCase().split(' ').join('')"
+                    [formControlName]="input.toLowerCase().split(' ').join('')"
+                    class="form-control">
+            </div>
+            <div *ngSwitchCase="'Email'">
+                    <input type="email"
+                    [id]="input.toLowerCase().split(' ').join('')"
+                    [formControlName]="input.toLowerCase().split(' ').join('')"
+                    class="form-control">
+            </div>
+            <div *ngSwitchDefault>
+                    <input type="text"
+                    [id]="input.toLowerCase().split(' ').join('')"
+                    [formControlName]="input.toLowerCase().split(' ').join('')"
+                    class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="radio" *ngFor="let gender of genders">
+            <label for="gender">
+                <input 
+                    type="radio"
+                    formControlName="gender" 
+                    [value]="gender"> {{ gender }}
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="country">Country:</label>
+        <select 
+            name="country" 
+            id="country"
+            class="form-control"
+            formControlName="country">
+                <option *ngFor="let country of countries; let i = index" 
+                [ngValue]="country">
+                {{country}}</option>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Add Friend</button>
+</form>
