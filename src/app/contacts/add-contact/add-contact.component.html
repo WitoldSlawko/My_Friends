@@ -1,20 +1,5 @@
 <h5>Add your Friend</h5>
 <form [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
-    <!--
-    <div class="form-group" *ngFor="let input of inputs; let i = index">
-        <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
-        <input *ngIf="input == 'Phone Number'; else texted" type="number"
-            [id]="input.toLowerCase().split(' ').join('')"
-            [formControlName]="input.toLowerCase().split(' ').join('')"
-            class="form-control">
-        <ng-template #texted>
-            <input type="text"
-            [id]="input.toLowerCase().split(' ').join('')"
-            [formControlName]="input.toLowerCase().split(' ').join('')"
-            class="form-control">
-        </ng-template>   
-    </div>
-    -->
     <div class="form-group" *ngFor="let input of inputs; let i = index">
         <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
         <div [ngSwitch]="input">

@@ -5,10 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AddContactComponent } from './add-contact/add-contact.component';
-import { ContactListComponent } from './contact-list/contact-list.component';
+import { AddContactComponent } from './contacts/add-contact/add-contact.component';
+import { ContactListComponent } from './contacts/contact-list/contact-list.component';
 
-import { ContactsService } from './services/contacts.service';
+import { ContactsService } from './contacts/contacts.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },

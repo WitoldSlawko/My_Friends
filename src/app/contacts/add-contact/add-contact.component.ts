@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ContactsService } from '../services/contacts.service';
+import { ContactsService } from '../contacts.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -31,7 +31,7 @@ export class AddContactComponent implements OnInit{
 
   onSubmit() {
     console.log(this.addContactForm.value);
-    this.contactsService.contacts.push(JSON.stringify(this.addContactForm.value));
+    this.contactsService.contacts.push(this.addContactForm.value);
     this.addContactForm.reset()
   }
 
