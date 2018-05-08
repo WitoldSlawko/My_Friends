@@ -30,8 +30,13 @@ export class AddContactComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log(this.addContactForm.value);
-    this.contactsService.contacts.push(this.addContactForm.value);
+    // console.log(this.addContactForm.value);
+    // this.contactsService.contacts.push(this.addContactForm.value);
+    this.contactsService.storeContact(this.addContactForm.value)
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
     this.addContactForm.reset()
   }
 

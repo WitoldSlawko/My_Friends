@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -9,6 +10,7 @@ import { AddContactComponent } from './contacts/add-contact/add-contact.componen
 import { ContactListComponent } from './contacts/contact-list/contact-list.component';
 
 import { ContactsService } from './contacts/contacts.service';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [
     ContactsService
