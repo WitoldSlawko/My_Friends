@@ -1,9 +1,19 @@
 <div class="container">
     <div class="row">
-        <h2>My Friends</h2>
+        <h2>My Friends</h2> 
     </div>
     <div class="row">
         <ul class="nav nav-tabs">
+            <li role="presentation"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/sign-up">Sign Up</a>
+            </li>
+            <li role="presentation"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/sign-in">Sign In</a>
+            </li>
             <li role="presentation"
                     routerLinkActive="active"
                     [routerLinkActiveOptions]="{exact: true}">
