@@ -1,36 +1,29 @@
 <div class="container">
     <div class="row">
-        <h2>My Friends</h2> 
+        <h2>My Friends</h2>
+        <button *ngIf="authService.isAuthenticated()" class="btn btn-primary" (click)="onLogout()">Log out</button>
     </div>
     <div class="row">
         <ul class="nav nav-tabs">
-            <li role="presentation"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink="/sign-up">Sign Up</a>
-            </li>
-            <li role="presentation"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink="/sign-in">Sign In</a>
-            </li>
-            <li role="presentation"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink="/">Home</a>
-            </li>
-            <li role="presentation"
-                    routerLinkActive="active">
-                <a routerLink="/add-contact">Add Contact</a>
-            </li>
-            <li role="presentation"
-                    routerLinkActive="active">
-                <a routerLink="/contact-list">Contact List</a>
-            </li>
+            <ng-template [ngIf]="!authService.isAuthenticated()">
+                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a routerLink="/sign-up">Sign Up</a>
+                </li>
+                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a routerLink="/sign-in">Sign In</a>
+                </li>
+            </ng-template>
+            <ng-template [ngIf]="authService.isAuthenticated()">
+                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a routerLink="/add-contact">Add Contact</a>
+                </li>
+                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a routerLink="/contact-list">Contact List</a>
+                </li>
+            </ng-template>
         </ul>
     </div>
     <div class="row">
         <router-outlet></router-outlet>
     </div>
 </div>
-

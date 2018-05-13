@@ -13,11 +13,12 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 
 import { ContactsService } from './contacts/contacts.service';
 import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'add-contact', component: AddContactComponent },
-  { path: 'contact-list', component: ContactListComponent },
+  { path: 'add-contact', component: AddContactComponent, canActivate: [AuthGuardService] },
+  { path: 'contact-list', component: ContactListComponent, canActivate: [AuthGuardService] },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-in', component: SignInComponent }
 ];
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     ContactsService,
-    AuthService
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
