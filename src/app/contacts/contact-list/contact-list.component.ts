@@ -14,19 +14,30 @@ export class ContactListComponent implements OnInit {
   retrivedContacts: {};
 
   ngOnInit() {
+    this.updateContactList();
+  }
+
+  updateContactList() {
     this.contacts = this.contactsService.contacts;
     this.contactsService.retriveContacts()
       .subscribe(
         (response) => {
           this.contacts = [];
           this.retrivedContacts = JSON.parse(response["_body"]);
-          console.log(this.retrivedContacts)
           for (var prop in this.retrivedContacts) {
             this.contacts.push(this.retrivedContacts[prop])
           }
         },
         (error) => console.log(error)
       );
+  }
+
+  onContactDeletion(index) {
+    let contactFromIndex = Object.keys(this.retrivedContacts)[index];
+    this.contactsService.deleteContact(contactFromIndex)
+      .subscribe(() => {
+        this.updateContactList();
+      })
   }
 
 }

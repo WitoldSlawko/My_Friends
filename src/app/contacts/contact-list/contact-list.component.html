@@ -1,5 +1,5 @@
 <ol>
-  <li *ngFor="let contact of contacts">
+  <li *ngFor="let contact of contacts; let i = index">
     <div>First Name: {{ contact.firstname }}</div>
     <div>Last Name: {{ contact.lastname }}</div>
     <div>Phone Number: {{ contact.phonenumber }}</div>
@@ -7,5 +7,6 @@
     <div>Gender: {{ contact.gender }}</div>
     <div>City: {{ contact.city }}</div>
     <div>Country: {{ contact.country }}</div>
+    <button class="btn btn-primary" (click)="onContactDeletion(i)">Delete contact</button>
   </li>
 </ol>

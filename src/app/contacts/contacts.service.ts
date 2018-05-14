@@ -23,4 +23,9 @@ export class ContactsService {
     return this.http.get('https://my-friends-base.firebaseio.com/.json?auth=' + this.token);
   }
 
+  deleteContact(contact) {
+    this.token = this.authService.getToken();
+    return this.http.delete(`https://my-friends-base.firebaseio.com/${contact}.json?auth=` + this.token);
+  }
+
 }
