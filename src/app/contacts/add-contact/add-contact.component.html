@@ -1,6 +1,6 @@
 <h5>Add your Friend</h5>
-<form [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
-    <div class="form-group" *ngFor="let input of inputs; let i = index">
+<form class="ui form" [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
+    <div class="field" *ngFor="let input of inputs; let i = index">
         <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
         <div [ngSwitch]="input">
             <div *ngSwitchCase="'Phone Number'">
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="field">
         <div class="radio" *ngFor="let gender of genders">
             <label for="gender">
                 <input 
@@ -33,7 +33,7 @@
             </label>
         </div>
     </div>
-    <div class="form-group">
+    <div class="field">
         <label for="country">Country:</label>
         <select 
             name="country" 
