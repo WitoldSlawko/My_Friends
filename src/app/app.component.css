@@ -1,1 +1,17 @@
+#container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
 
+#nav {
+    height: 36px;
+}
+
+h2 {
+    text-align: center;
+}
+
+ul li {
+    display: inline;
+    padding: 0 20px;
+}

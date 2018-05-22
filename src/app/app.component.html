@@ -1,10 +1,19 @@
-<div class="container">
-    <div class="row">
-        <h2>My Friends</h2>
-        <button *ngIf="authService.isAuthenticated()" class="btn btn-primary" (click)="onLogout()">Log out</button>
+<div class="ui  grid" id="container">
+    <div class="row" id="nav">
+        <div class="fourteen wide column"></div>
+        <div class="two wide column">
+            <button *ngIf="authService.isAuthenticated()" class="ui secondary button" (click)="onLogout()">Log out</button>
+        </div>
+    </div>
+    <div class="three column row">
+        <div class="column"></div>
+        <div class="column">
+            <h2>My Friends</h2>
+        </div>
+        <div class="column"></div>
     </div>
     <div class="row">
-        <ul class="nav nav-tabs">
+        <ul class="">
             <ng-template [ngIf]="!authService.isAuthenticated()">
                 <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <a routerLink="/sign-up">Sign Up</a>
@@ -23,7 +32,11 @@
             </ng-template>
         </ul>
     </div>
-    <div class="row">
-        <router-outlet></router-outlet>
+    <div class="three column row">
+        <div class="column"></div>
+        <div class="column">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="column"></div>
     </div>
 </div>
