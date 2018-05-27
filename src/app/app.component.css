@@ -15,3 +15,10 @@ ul li {
     display: inline;
     padding: 0 20px;
 }
+
+#routing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}

@@ -11,6 +11,10 @@ export class AuthService {
     message: ''
   }
 
+  signingInResult: { message: string } = {
+    message: ''
+  }
+
   token: string;
 
   constructor(private router: Router ) { }
@@ -48,6 +52,7 @@ export class AuthService {
       )
       .catch(
         (error) => {
+          this.signingInResult.message = error.message;
           console.log(error);
         }
       )

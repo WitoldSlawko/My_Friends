@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-/*
+
 * {
     border: 1px dashed black;
 }
-*/
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form button {
+    align-self: center;
+}

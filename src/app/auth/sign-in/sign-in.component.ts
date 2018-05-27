@@ -9,9 +9,12 @@ import { AuthService } from '../auth.service';
 })
 export class SignInComponent implements OnInit {
 
+  signingInResult: { message: string };
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.signingInResult = this.authService.signingInResult;
   }
 
   onSignIn(form: NgForm) {

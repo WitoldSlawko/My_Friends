@@ -1,22 +1,18 @@
-<ol>
-  <li *ngFor="let contact of contacts; let i = index">
-    <div class="ui list">
-      <div class="item">
-        <div class="content">
-          <a class="header">
-            <img class="ui avatar image" src="assets/images/female.png">
-            {{ contact.firstname }} {{ contact.lastname }}
-            <button class="ui red button" (click)="onContactDeletion(i)">x</button>
-          </a>
-          <div class="description">
-              <div>Phone Number: <strong>{{ contact.phonenumber }}</strong></div>
-              <div>Email: <strong>{{ contact.email }}</strong></div>
-              <div>Gender: <strong>{{ contact.gender }}</strong></div>
-              <div>City: <strong>{{ contact.city }}</strong></div>
-              <div>Country: <strong>{{ contact.country }}</strong></div>
-          </div>
-        </div>
+<div class="ui list" id="contact" *ngFor="let contact of contacts; let i = index">
+  <div class="item">
+    <div class="content">
+      <a class="header">
+        <img *ngIf="contact.gender == 'Female'" class="ui avatar image" src="assets/images/female.png">
+        <img *ngIf="contact.gender == 'Male'" class="ui avatar image" src="assets/images/male.png">
+          {{ contact.firstname }} {{ contact.lastname }}
+        <button class="ui red button" (click)="onContactDeletion(i)">x</button>
+      </a>
+      <div class="description">
+          <div>Phone Number: <strong>{{ contact.phonenumber }}</strong></div>
+          <div>Email: <strong>{{ contact.email }}</strong></div>
+          <div>City: <strong>{{ contact.city }}</strong></div>
+          <div>Country: <strong>{{ contact.country }}</strong></div>
       </div>
     </div>
-  </li>
-</ol>
+  </div>
+</div>
