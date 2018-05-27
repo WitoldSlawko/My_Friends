@@ -1,49 +1,56 @@
-<h5>Add your Friend</h5>
-<form class="ui form" [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
-    <div class="field" *ngFor="let input of inputs; let i = index">
-        <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
-        <div [ngSwitch]="input">
-            <div *ngSwitchCase="'Phone Number'">
-                    <input type="number"
-                    [id]="input.toLowerCase().split(' ').join('')"
-                    [formControlName]="input.toLowerCase().split(' ').join('')"
-                    class="form-control">
+<div class="ui grid container">
+    <div class="three column row">
+        <div class="column"></div>
+        <div class="column">
+        <h5>Add your Friend</h5>
+        <form class="ui form" [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
+            <div class="field" *ngFor="let input of inputs; let i = index">
+                <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
+                <div [ngSwitch]="input">
+                    <div *ngSwitchCase="'Phone Number'">
+                            <input type="number"
+                            [id]="input.toLowerCase().split(' ').join('')"
+                            [formControlName]="input.toLowerCase().split(' ').join('')"
+                            class="form-control">
+                    </div>
+                    <div *ngSwitchCase="'Email'">
+                            <input type="email"
+                            [id]="input.toLowerCase().split(' ').join('')"
+                            [formControlName]="input.toLowerCase().split(' ').join('')"
+                            class="form-control">
+                    </div>
+                    <div *ngSwitchDefault>
+                            <input type="text"
+                            [id]="input.toLowerCase().split(' ').join('')"
+                            [formControlName]="input.toLowerCase().split(' ').join('')"
+                            class="form-control">
+                    </div>
+                </div>
             </div>
-            <div *ngSwitchCase="'Email'">
-                    <input type="email"
-                    [id]="input.toLowerCase().split(' ').join('')"
-                    [formControlName]="input.toLowerCase().split(' ').join('')"
-                    class="form-control">
+            <div class="field">
+                <div class="radio" *ngFor="let gender of genders">
+                    <label for="gender">
+                        <input 
+                            type="radio"
+                            formControlName="gender" 
+                            [value]="gender"> {{ gender }}
+                    </label>
+                </div>
             </div>
-            <div *ngSwitchDefault>
-                    <input type="text"
-                    [id]="input.toLowerCase().split(' ').join('')"
-                    [formControlName]="input.toLowerCase().split(' ').join('')"
-                    class="form-control">
+            <div class="field">
+                <label for="country">Country:</label>
+                <select 
+                    name="country" 
+                    id="country"
+                    class="form-control"
+                    formControlName="country">
+                        <option *ngFor="let country of countries; let i = index" 
+                        [ngValue]="country">
+                        {{country}}</option>
+                </select>
             </div>
+            <button class="ui green button" type="submit">Add Friend</button>
+        </form>
         </div>
     </div>
-    <div class="field">
-        <div class="radio" *ngFor="let gender of genders">
-            <label for="gender">
-                <input 
-                    type="radio"
-                    formControlName="gender" 
-                    [value]="gender"> {{ gender }}
-            </label>
-        </div>
-    </div>
-    <div class="field">
-        <label for="country">Country:</label>
-        <select 
-            name="country" 
-            id="country"
-            class="form-control"
-            formControlName="country">
-                <option *ngFor="let country of countries; let i = index" 
-                [ngValue]="country">
-                {{country}}</option>
-        </select>
-    </div>
-    <button class="ui green button" type="submit">Add Friend</button>
-</form>
+</div>

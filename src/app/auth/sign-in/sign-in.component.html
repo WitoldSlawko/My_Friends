@@ -1,15 +1,23 @@
-<form class="ui form" (ngSubmit)="onSignIn(f)" #f="ngForm">
-    <div class="field">
-      <label for="email">E-mail: </label>
-      <input type="email" id="email" name="email" ngModel>
+<div class="ui  grid container">
+  <div class="three column row">
+    <div class="column"></div>
+    <div class="column">
+      <form class="ui form" (ngSubmit)="onSignIn(f)" #f="ngForm">
+          <div class="field">
+            <label for="email">E-mail: </label>
+            <input type="email" id="email" name="email" ngModel>
+          </div>
+          <div class="field">
+            <label for="password">Password: </label>
+            <input type="password" id="password" name="password" ngModel>
+          </div>
+          <button class="ui primary button" type="submit" [disabled]="!f.valid">Sign in !</button>
+        </form>
+        <br>
+        <div>
+          {{ signingInResult.message }}
+        </div>
     </div>
-    <div class="field">
-      <label for="password">Password: </label>
-      <input type="password" id="password" name="password" ngModel>
-    </div>
-    <button class="ui primary button" type="submit" [disabled]="!f.valid">Sign in !</button>
-  </form>
-  <br>
-  <div>
-    {{ signingInResult.message }}
+    <div class="column"></div>
   </div>
+</div>
