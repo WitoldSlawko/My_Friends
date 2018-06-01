@@ -1,9 +1,11 @@
+// modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+// components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AddContactComponent } from './contacts/add-contact/add-contact.component';
@@ -11,9 +13,13 @@ import { ContactListComponent } from './contacts/contact-list/contact-list.compo
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 
+// services
 import { ContactsService } from './contacts/contacts.service';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
+
+// pipes
+import { ArraySortPipe } from './pipes/sort.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,7 +36,8 @@ const appRoutes: Routes = [
     AddContactComponent,
     ContactListComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    ArraySortPipe
   ],
   imports: [
     BrowserModule,

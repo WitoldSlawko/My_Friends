@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="ui grid container">
-  <div class="four wide column" *ngFor="let contact of contacts; let i = index">
+  <div class="four wide column" *ngFor="let contact of contacts | sort: 'lastname'">
     <div class="ui list">
       <div class="item">
         <div class="content person">
@@ -17,7 +17,7 @@
             <img *ngIf="contact.gender == 'Female'" class="ui avatar image" src="assets/images/female.png">
             <img *ngIf="contact.gender == 'Male'" class="ui avatar image" src="assets/images/male.png">
               {{ contact.firstname }} {{ contact.lastname }}
-            <button class="ui red button" (click)="onContactDeletion(i)">x</button>
+            <button class="ui red button" (click)="onContactDeletion(contact.idCode)">x</button>
           </a>
           <div class="description">
               <div>Phone Number: <strong>{{ contact.phonenumber }}</strong></div>

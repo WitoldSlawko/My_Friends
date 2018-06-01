@@ -25,16 +25,18 @@ export class ContactListComponent implements OnInit {
           this.contacts = [];
           this.retrivedContacts = JSON.parse(response["_body"]);
           for (var prop in this.retrivedContacts) {
-            this.contacts.push(this.retrivedContacts[prop])
+            this.contacts.push(Object.assign({}, this.retrivedContacts[prop], {idCode: prop}));
           }
+          console.log(this.contacts);
+          console.log(this.retrivedContacts)
         },
         (error) => console.log(error)
       );
   }
 
-  onContactDeletion(index) {
-    let contactFromIndex = Object.keys(this.retrivedContacts)[index];
-    this.contactsService.deleteContact(contactFromIndex)
+  onContactDeletion(idCode) {
+    console.log(idCode)
+    this.contactsService.deleteContact(idCode)
       .subscribe(() => {
         this.updateContactList();
       })
