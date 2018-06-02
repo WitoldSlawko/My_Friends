@@ -12,6 +12,7 @@ export class ContactListComponent implements OnInit {
 
   contacts: {}[] = [];
   retrivedContacts: {};
+  searchText: string = '';
 
   ngOnInit() {
     this.updateContactList();
@@ -25,10 +26,13 @@ export class ContactListComponent implements OnInit {
           this.contacts = [];
           this.retrivedContacts = JSON.parse(response["_body"]);
           for (var prop in this.retrivedContacts) {
-            this.contacts.push(Object.assign({}, this.retrivedContacts[prop], {idCode: prop}));
+            this.contacts.push(Object.assign(
+              {}, 
+              this.retrivedContacts[prop], 
+              {idCode: prop},
+              {nameSerach: this.retrivedContacts[prop]['firstname'] +  this.retrivedContacts[prop]['lastname']}
+            ));
           }
-          console.log(this.contacts);
-          console.log(this.retrivedContacts)
         },
         (error) => console.log(error)
       );

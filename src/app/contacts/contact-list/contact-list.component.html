@@ -3,13 +3,13 @@
     <div class="column">
       <form class="ui form" style="flex-direction: row">
         <label for="">Serach contact:</label>
-        <input class="form-control" type="text">
+        <input class="form-control" name="serach" [(ngModel)]="searchText" placeholder="search text goes here" type="text">
       </form>
     </div>
   </div>
 </div>
 <div class="ui grid container">
-  <div class="four wide column" *ngFor="let contact of contacts | sort: 'lastname'">
+  <div class="four wide column" *ngFor="let contact of contacts | sort: 'lastname' | filter: 'nameSerach' : searchText">
     <div class="ui list">
       <div class="item">
         <div class="content person">

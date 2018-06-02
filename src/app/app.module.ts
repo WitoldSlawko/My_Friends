@@ -20,6 +20,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 
 // pipes
 import { ArraySortPipe } from './pipes/sort.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
     ContactListComponent,
     SignUpComponent,
     SignInComponent,
-    ArraySortPipe
+    ArraySortPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
