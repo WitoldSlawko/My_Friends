@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { AuthService } from '../auth/auth.service';
+
+/**
+ * We could use rules here like:
+ * - cache over network e.g. update view first from storage then from network
+ * - network over cache e.g. use local storage only when internet problem after reconnection updated db if needed
+ */
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +16,34 @@ export class ContactsService {
 
   contacts: string[] = [];
 
-  constructor(private http: Http, private authService: AuthService) {}
+  contactProperties: string[] = ['First Name', 'Last Name', 'Email', 'Phone Number', 'City', 'Country', 'Gender'];
 
-  storeContact(contactForm) {
-    this.token = this.authService.getToken();
-    return this.http.post('https://my-friends-base.firebaseio.com/.json?auth=' + this.token, contactForm);
+  constructor(private authService: AuthService) {}
+
+  private onRetrieveContactsSuccess (response) {
+    const contacts: {}[] = [];
+      const retrivedContacts = JSON.parse(response["_body"]);
+      for (var prop in retrivedContacts) {
+        contacts.push(Object.assign(
+          {}, 
+          retrivedContacts[prop], 
+          {idCode: prop},
+          {nameSearch: ''}
+        ));
+      }
+      return contacts;
   }
 
-  retriveContacts() {
-    this.token = this.authService.getToken();
-    return this.http.get('https://my-friends-base.firebaseio.com/.json?auth=' + this.token);
+  public storeContact(contactForm) {
+    // fb leftover
   }
 
-  deleteContact(contact) {
-    this.token = this.authService.getToken();
-    return this.http.delete(`https://my-friends-base.firebaseio.com/${contact}.json?auth=` + this.token);
+  public retriveContacts() {
+    // leftover
+  }
+
+  public deleteContact(contact) {
+    // fb leftover
   }
 
 }

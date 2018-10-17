@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -17,55 +16,18 @@ export class AuthService {
 
   token: string;
 
-  constructor(private router: Router ) { }
+  constructor(private router: Router) { }
 
   signUpUser(email: string, password: string){
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(
-        (response) => {
-          this.signingUpResult.message = 'New user signed up successfuly !';
-          console.log(response);
-        }
-      )
-      .catch(
-        (error) => {
-          this.signingUpResult.message = error.message;
-          console.log(error);
-          console.log(error.message);
-        }
-      )
+    // fb leftover
   }
 
   signInUser(email: string, password: string){
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(
-        (response) => {
-          this.router.navigate(['contact-list']);
-          firebase.auth().currentUser.getIdToken()
-            .then(
-              (token) => {
-                this.token = token;
-              }
-            )
-          console.log(response);
-        }
-      )
-      .catch(
-        (error) => {
-          this.signingInResult.message = error.message;
-          console.log(error);
-        }
-      )
+    // fb leftover
   }
 
   getToken() {
-    firebase.auth().currentUser.getIdToken()
-      .then(
-        (token) => {
-          this.token = token;
-        }
-      )
-    return this.token;
+    // fb lefover
   }
 
   isAuthenticated(): boolean {
@@ -73,7 +35,6 @@ export class AuthService {
   }
 
   logout() {
-    firebase.auth().signOut();
     this.token = null;
   }
 }

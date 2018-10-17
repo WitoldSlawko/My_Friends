@@ -1,19 +1,2 @@
 /* You can add global styles to this file, and also import other style files */
-/*
-* {
-    border: 1px dashed black;
-}
-*/
-.container {
-    margin: 0 auto;
-    max-width: 1200px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-form button {
-    align-self: center;
-}
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";

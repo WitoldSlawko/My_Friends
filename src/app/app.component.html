@@ -1,36 +1,20 @@
-<div class="ui grid container">
-    <div class="row" id="nav">
-        <div class="fourteen wide column"></div>
-        <div class="two wide column">
-            <button *ngIf="authService.isAuthenticated()" class="ui secondary button" (click)="onLogout()">Log out</button>
-        </div>
+<mat-grid-list cols="3" rowHeight="50px">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile>
+        <h2>My Friends</h2>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button *ngIf="authService.isAuthenticated()" mat-raised-button color="warn" (click)="onLogout()">Log out</button>
+    </mat-grid-tile>
+</mat-grid-list>
+<nav mat-tab-nav-bar>
+    <div *ngIf="!authService.isAuthenticated()">
+        <a mat-tab-link routerLink="/sign-up">Sign Up</a>
+        <a mat-tab-link routerLink="/sign-in">Sign In</a>
     </div>
-    <div class="three column row">
-        <div class="column"></div>
-        <div class="column">
-            <h2>My Friends</h2>
-        </div>
-        <div class="column"></div>
+    <div *ngIf="authService.isAuthenticated()">
+        <a mat-tab-link routerLink="/add-contact">Add Contact</a>
+        <a mat-tab-link routerLink="/contact-list">Contact List</a>
     </div>
-    <div class="row">
-        <ul class="">
-            <ng-template [ngIf]="!authService.isAuthenticated()">
-                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a routerLink="/sign-up">Sign Up</a>
-                </li>
-                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a routerLink="/sign-in">Sign In</a>
-                </li>
-            </ng-template>
-            <ng-template [ngIf]="authService.isAuthenticated()">
-                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a routerLink="/add-contact">Add Contact</a>
-                </li>
-                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a routerLink="/contact-list">Contact List</a>
-                </li>
-            </ng-template>
-        </ul>
-    </div>
-</div>
+</nav>
 <router-outlet></router-outlet>

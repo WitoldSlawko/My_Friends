@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MaterialModule } from './shared/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 // components
 import { AppComponent } from './app.component';
@@ -14,6 +17,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 
 // services
+import { ContactsLocalStorageAdapter } from './contacts/contacts.localstorage.adapter';
 import { ContactsService } from './contacts/contacts.service';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
@@ -21,6 +25,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 // pipes
 import { ArraySortPipe } from './pipes/sort.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { LayoutModule } from '@angular/cdk/layout';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -46,10 +51,15 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MaterialModule,
+    LayoutModule,
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
     ContactsService,
+    ContactsLocalStorageAdapter,
     AuthService,
     AuthGuardService
   ],

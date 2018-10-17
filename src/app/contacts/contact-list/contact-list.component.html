@@ -1,32 +1,44 @@
-<div class="ui four column grid container">
-  <div class="two column row">
-    <div class="column">
-      <form class="ui form" style="flex-direction: row">
-        <label for="">Serach contact:</label>
-        <input class="form-control" name="serach" [(ngModel)]="searchText" placeholder="search text goes here" type="text">
-      </form>
-    </div>
-  </div>
-</div>
-<div class="ui grid container">
-  <div class="four wide column" *ngFor="let contact of contacts | sort: 'lastname' | filter: 'nameSerach' : searchText">
-    <div class="ui list">
-      <div class="item">
-        <div class="content person">
-          <a class="header">
-            <img *ngIf="contact.gender == 'Female'" class="ui avatar image" src="assets/images/female.png">
-            <img *ngIf="contact.gender == 'Male'" class="ui avatar image" src="assets/images/male.png">
-              {{ contact.firstname }} {{ contact.lastname }}
-            <button class="ui red button" (click)="onContactDeletion(contact.idCode)">x</button>
-          </a>
-          <div class="description">
-              <div>Phone Number: <strong>{{ contact.phonenumber }}</strong></div>
-              <div>Email: <strong>{{ contact.email }}</strong></div>
-              <div>City: <strong>{{ contact.city }}</strong></div>
-              <div>Country: <strong>{{ contact.country }}</strong></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-grid-list cols="3" rowHeight="100px">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field>
+      <label for="search">Search contact:</label>
+      <input [disabled]="!searchActivated" matInput name="search" [(ngModel)]="searchText" type="text">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="10" rowHeight="50px">
+  <mat-grid-tile colspan="1"></mat-grid-tile>
+  <mat-grid-tile colspan="8">
+    <mat-button-toggle-group>
+      <mat-slide-toggle *ngFor="let contactProperty of contactProperties"
+      (change)="changeQuerySearchText($event, contactProperty.toLowerCase().split(' ').join(''))">
+          {{contactProperty}}
+      </mat-slide-toggle>
+    </mat-button-toggle-group>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1"></mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="4" rowHeight="400px">
+  <mat-grid-tile *ngFor="let contact of contacts | sort: 'lastname' | filter: 'nameSearch' : searchText">
+    <mat-card>
+      <mat-card-header>
+        <div *ngIf="contact.gender == 'Female'" mat-card-avatar class="female"></div>
+        <div *ngIf="contact.gender == 'Male'" mat-card-avatar class="male"></div>
+        <mat-card-title>
+          {{ contact.firstname }} {{ contact.lastname }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <button mat-raised-button color="warn" (click)="onContactDeletion(contact.idCode)">X</button>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-list role="list">
+        <mat-list-item *ngIf="contact.phonenumber" role="listitem">Phone Number: <strong>{{ contact.phonenumber }}</strong></mat-list-item>
+        <mat-list-item *ngIf="contact.email" role="listitem">E-mail: <strong>{{ contact.email }}</strong></mat-list-item>
+        <mat-list-item *ngIf="contact.city" role="listitem">City: <strong>{{ contact.city }}</strong></mat-list-item>
+        <mat-list-item *ngIf="contact.country" role="listitem">Country: <strong>{{ contact.country }}</strong></mat-list-item>
+      </mat-list>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

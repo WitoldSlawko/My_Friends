@@ -1,10 +1,9 @@
-.person {
-    margin: 10px;
-    padding:10px;
-    border: 2px solid darkblue;
-    border-radius: 10%;
+.female {
+    background-image: url("../../../assets/images/female.png");
+    background-size: cover;
 }
 
-#search {
-    flex-direction: row;
+.male {
+    background-image: url("../../../assets/images/male.png");
+    background-size: cover;
 }
