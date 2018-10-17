@@ -8,42 +8,50 @@ import { ContactsService } from '../contacts.service';
 })
 export class ContactListComponent implements OnInit {
 
-  constructor(private contactsService: ContactsService) {}
+  constructor(private contactsService: ContactsService) { }
 
   contacts: {}[] = [];
   retrivedContacts: {};
   searchText: string = '';
+  contactProperties: string[] = this.contactsService.contactProperties;
+  searchActivated: boolean = false;
 
   ngOnInit() {
     this.updateContactList();
   }
 
-  updateContactList() {
-    this.contacts = this.contactsService.contacts;
-    this.contactsService.retriveContacts()
-      .subscribe(
-        (response) => {
-          this.contacts = [];
-          this.retrivedContacts = JSON.parse(response["_body"]);
-          for (var prop in this.retrivedContacts) {
-            this.contacts.push(Object.assign(
-              {}, 
-              this.retrivedContacts[prop], 
-              {idCode: prop},
-              {nameSerach: this.retrivedContacts[prop]['firstname'] +  this.retrivedContacts[prop]['lastname']}
-            ));
-          }
-        },
-        (error) => console.log(error)
-      );
+  changeQuerySearchText(event, property) {
+    return this.contacts.forEach((contact, index) => {
+      if (event.checked) {
+        this.searchActivated = true;
+        this.contacts[index]['nameSearch'] += this.contacts[index][property];
+      } else {
+        this.contacts[index]['nameSearch'] = this.contacts[index]['nameSearch'].replace(this.contacts[index][property], '');
+        if (!this.contacts[index]['nameSearch'].length) {
+          this.searchActivated = false;
+        }
+      }
+    });
   }
 
-  onContactDeletion(idCode) {
-    console.log(idCode)
-    this.contactsService.deleteContact(idCode)
-      .subscribe(() => {
-        this.updateContactList();
-      })
-  }
+updateContactList() {
+  this.contactsService.retriveContacts()
+    .then((contacts: {}[]) => {
+      this.contacts = contacts;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+onContactDeletion(idCode) {
+  this.contactsService.deleteContact(idCode)
+    .then(() => {
+      this.updateContactList();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 }

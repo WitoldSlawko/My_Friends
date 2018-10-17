@@ -1,23 +1,34 @@
-<div class="ui  grid container">
-  <div class="three column row">
-    <div class="column"></div>
-    <div class="column">
-      <form class="ui form" (ngSubmit)="onSignIn(f)" #f="ngForm">
-          <div class="field">
-            <label for="email">E-mail: </label>
-            <input type="email" id="email" name="email" ngModel>
-          </div>
-          <div class="field">
-            <label for="password">Password: </label>
-            <input type="password" id="password" name="password" ngModel>
-          </div>
-          <button class="ui primary button" type="submit" [disabled]="!f.valid">Sign in !</button>
-        </form>
-        <br>
-        <div>
-          {{ signingInResult.message }}
-        </div>
+<mat-grid-list cols="3" rowHeight="200px">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <form [formGroup]="signInForm" (ngSubmit)="onSignIn()">
+    <div>
+      <mat-form-field>
+        <label for="email">E-mail:</label>
+        <input [formControlName]="'email'" matInput type="email" id="email" name="email" ngModel>
+        <title *ngIf="!signInForm.get('email').valid && signInForm.get('email').touched">Please enter a valid email adress!</title>
+      </mat-form-field>
     </div>
-    <div class="column"></div>
-  </div>
-</div>
+    <div>
+      <mat-form-field>
+        <label for="password">Password:</label>
+        <input [formControlName]="'password'" matInput type="password" id="password" name="password" ngModel>
+      </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!signInForm.valid">Sign in !</button>
+    </form>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="3" rowHeight="100px">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <ul>
+      <li *ngIf="!signInForm.get('email').valid && signInForm.get('email').touched">Please enter a valid email adress!</li>
+      <li *ngIf="!signInForm.get('password').valid && signInForm.get('password').touched">Wrong password!</li>
+      <li *ngIf="signingInResult.message">{{ signingInResult.message }}</li>
+    </ul>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

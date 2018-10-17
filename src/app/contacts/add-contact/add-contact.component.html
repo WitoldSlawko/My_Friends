@@ -1,56 +1,66 @@
-<div class="ui grid container">
-    <div class="three column row">
-        <div class="column"></div>
-        <div class="column">
-        <h5>Add your Friend</h5>
-        <form class="ui form" [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
-            <div class="field" *ngFor="let input of inputs; let i = index">
-                <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
+<mat-grid-list cols="3" rowHeight="600px">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile>
+        <form [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
+            <div *ngFor="let input of contactProperties; let i = index">
                 <div [ngSwitch]="input">
                     <div *ngSwitchCase="'Phone Number'">
-                            <input type="number"
-                            [id]="input.toLowerCase().split(' ').join('')"
-                            [formControlName]="input.toLowerCase().split(' ').join('')"
-                            class="form-control">
+                            <mat-form-field>
+                                    <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
+                                <input matInput type="number"
+                                    [id]="input.toLowerCase().split(' ').join('')"
+                                    [formControlName]="input.toLowerCase().split(' ').join('')"
+                                    [name]="input.toLowerCase().split(' ').join('')"
+                                    >
+                            </mat-form-field>
                     </div>
                     <div *ngSwitchCase="'Email'">
-                            <input type="email"
-                            [id]="input.toLowerCase().split(' ').join('')"
-                            [formControlName]="input.toLowerCase().split(' ').join('')"
-                            class="form-control">
+                            <mat-form-field>
+                                <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
+                                <input matInput type="email"
+                                    [id]="input.toLowerCase().split(' ').join('')"
+                                    [formControlName]="input.toLowerCase().split(' ').join('')"
+                                    [name]="input.toLowerCase().split(' ').join('')">
+                            </mat-form-field>
                     </div>
                     <div *ngSwitchDefault>
-                            <input type="text"
-                            [id]="input.toLowerCase().split(' ').join('')"
-                            [formControlName]="input.toLowerCase().split(' ').join('')"
-                            class="form-control">
+                        <div *ngIf="i <= 3">
+                            <mat-form-field>
+                                <label [for]="input.toLowerCase().split(' ').join('')">{{ input }}</label>
+                                <input matInput  type="text"
+                                    [id]="input.toLowerCase().split(' ').join('')"
+                                    [formControlName]="input.toLowerCase().split(' ').join('')"
+                                    [name]="input.toLowerCase().split(' ').join('')">
+                            </mat-form-field>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="field">
-                <div class="radio" *ngFor="let gender of genders">
-                    <label for="gender">
-                        <input 
-                            type="radio"
-                            formControlName="gender" 
-                            [value]="gender"> {{ gender }}
-                    </label>
-                </div>
+            <div>
+                <mat-radio-group formControlName="gender" matInput>
+                    <mat-radio-button value="Female">Female</mat-radio-button>
+                    <mat-radio-button value="Male">Male</mat-radio-button>
+                </mat-radio-group>
             </div>
-            <div class="field">
-                <label for="country">Country:</label>
-                <select 
-                    name="country" 
-                    id="country"
-                    class="form-control"
-                    formControlName="country">
-                        <option *ngFor="let country of countries; let i = index" 
-                        [ngValue]="country">
-                        {{country}}</option>
-                </select>
+            <div>
+                <mat-form-field>
+                    <mat-select formControlName="country" matInput placeholder="Select country" (selectionChange)="selectCountry($event)">
+                        <mat-option *ngFor="let country of countries" [value]="country">
+                        {{country}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-select formControlName="city" matInput placeholder="Select city">
+                        <mat-option *ngFor="let city of cities" [value]="city">
+                        {{city}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-            <button class="ui green button" type="submit">Add Friend</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!addContactForm.valid">Add Friend</button>
         </form>
-        </div>
-    </div>
-</div>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+  </mat-grid-list>

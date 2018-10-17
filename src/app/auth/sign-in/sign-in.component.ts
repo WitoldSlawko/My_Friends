@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -9,19 +9,25 @@ import { AuthService } from '../auth.service';
 })
 export class SignInComponent implements OnInit {
 
+  constructor(private authService: AuthService) { }
+
   signingInResult: { message: string };
 
-  constructor(private authService: AuthService) { }
+  signInForm: FormGroup;
 
   ngOnInit() {
     this.signingInResult = this.authService.signingInResult;
+
+    this.signInForm = new FormGroup({
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, [Validators.required, Validators.min(3)])
+    })
   }
 
-  onSignIn(form: NgForm) {
-    const email = form.value.email;
-    const password = form.value.password;
-    this.authService.signInUser(email, password);
-    form.reset();
+  onSignIn() {
+    console.log(this.signInForm)
+    this.authService.signInUser(this.signInForm.value.email, this.signInForm.value.password);
+    this.signInForm.reset();
   }
 
 }

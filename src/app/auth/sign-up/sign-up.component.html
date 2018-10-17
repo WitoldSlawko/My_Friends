@@ -1,23 +1,33 @@
-<div class="ui  grid container">
-    <div class="three column row">
-      <div class="column"></div>
-      <div class="column">
-        <form class="ui form" (ngSubmit)="onSignUp(f)" #f="ngForm">
-            <div class="field">
-              <label for="email">E-mail: </label>
-              <input type="email" id="email" name="email" ngModel>
-            </div>
-            <div class="field">
-              <label for="password">Password: </label>
-              <input type="password" id="password" name="password" ngModel>
-            </div>
-            <button class="ui primary button" type="submit" [disabled]="!f.valid">Sign up  !</button>
-          </form>
-          <br>
-          <div>
-            {{ signingUpResult.message }}
-          </div>
+<mat-grid-list cols="3" rowHeight="200px">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+      <div>
+        <mat-form-field>
+          <label for="email">E-mail:</label>
+          <input [formControlName]="'email'" matInput type="email" name="email" ngModel>
+        </mat-form-field>
       </div>
-    <div class="column"></div>
-  </div>
-</div>
+      <div>
+        <mat-form-field>
+          <label for="password">Password:</label>
+          <input [formControlName]="'password'" matInput type="password" name="password" ngModel>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid">Sign up !</button>
+    </form>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="3" rowHeight="100px">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+      <ul>
+          <li *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched">Please enter a valid email adress!</li>
+          <li *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched">Wrong password!</li>
+          <li *ngIf="signingUpResult.message">{{ signingUpResult.message }}</li>
+        </ul>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
